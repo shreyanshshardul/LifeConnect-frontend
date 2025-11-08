@@ -1,0 +1,9 @@
+.icons {
+  color: #6c757d; /* muted text jaisa */
+  transition: all 0.2s ease;
+}
+
+.icons:hover {
+  text-decoration: underline !important;
+  color: #cf2b2b !important; /* optional – thoda color change effect */
+}
