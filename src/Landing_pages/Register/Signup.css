@@ -1,0 +1,33 @@
+.signup-container {
+  display: flex;
+  height: 100vh;
+}
+
+/* LEFT PARALLAX IMAGE */
+.signup-left {
+  flex: 1;
+background-image: url("./bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* ⭐ Parallax */
+}
+
+/* RIGHT FORM SECTION */
+.signup-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* MOBILE responsive */
+@media (max-width: 768px) {
+  .signup-left {
+    display: none; /* hide image on small screens */
+  }
+  .signup-right {
+    flex: 1;
+    padding: 20px;
+  }
+}

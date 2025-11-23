@@ -6,11 +6,11 @@ export default function Hero() {
   return (
     <div className="container mt-5">
       <div className="row mt-5 text-center p-5">
-        <h1 className="fs-2 mt-5" style={{ color: "#cf2b2b" }}>
+        <h1 className="fs-2 mt-5" style={{ color:"#cf2b2b" }}>
           “We believe that saving lives is not just an act — it’s a shared
           responsibility.”
         </h1>
-        <h1 className="mt-3 fs-5 text-muted p-5">
+        <h1 className="mt-3 fs-5  p-5" style={{ color: "black" }}>
           “LifeConnect ensures that both donors and recipients get real-time,
           reliable assistance throughout their blood donation journey. Our team
           and technology are designed to make the process transparent, easy, and

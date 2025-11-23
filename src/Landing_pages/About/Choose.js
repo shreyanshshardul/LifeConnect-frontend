@@ -58,7 +58,7 @@ export default function Choose() {
           saves lives — one donation at a time.”
         </h1>
 
-        <Link to="/" className="text-center fs-3" style={{textDecoration:"none"}}>🩸 “Join as a Donor Now”</Link>
+        <Link to="/cards/donar" className="text-center fs-3" style={{textDecoration:"none"}}>🩸 “Join as a Donor Now”</Link>
       </div>
     </div>
   );

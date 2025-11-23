@@ -1,0 +1,100 @@
+/* Parallax background */
+.parallax-bg {
+  width: 100%;
+  min-height: 100vh;
+    background-image: url("./bg.jpg");/* public folder */
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  padding: 50px 0;
+  position: relative;
+}
+
+.parallax-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(4px);
+}
+
+/* Container to keep content above overlay */
+.card-container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Heading */
+.cards-heading {
+  color: red;
+  font-weight: 700;
+  text-shadow: 0px 2px 4px rgba(0,0,0,0.6);
+  letter-spacing: 1px;
+}
+
+/* Card style original but polished */
+.card-custom {
+  width: 18rem;
+  border-radius: 18px;
+  overflow: hidden;
+  border: none;
+  background: rgba(255,255,255,0.85);
+  transition: 0.25s ease-in-out;
+  position: relative;
+}
+
+/* Hover effect */
+.card-custom:hover {
+  transform: translateY(-4px);
+  box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
+}
+
+/* Donor & Recipient colors */
+.donor-card {
+  background-color: #D34E4E !important;
+}
+
+.recipient-card {
+  background-color: #8BAE66 !important;
+}
+
+/* Badge */
+.badge-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: white;
+  z-index: 10;
+}
+
+.donor-badge {
+  background-color: #b82323;
+}
+
+.recipient-badge {
+  background-color: #5f8f45;
+}
+
+/* Text */
+.card-body h4,
+.card-body p {
+  color: #000;
+  font-weight: 600;
+}
+
+/* Contact button */
+.contact-btn {
+  padding: 6px 18px;
+  border-radius: 20px;
+  border: none;
+  background: #fff;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.contact-btn:hover {
+  background: #f1f1f1;
+}

@@ -27,6 +27,9 @@ export default function Navbar() {
             <li className="nav-item">
               <Link className="nav-link active icons" to="/">Home</Link>
             </li>
+             <li className="nav-item">
+              <Link className="nav-link active icons" to="/cards">Explore</Link>
+            </li>
             <li className="nav-item">
               <Link className="nav-link active icons" to="/about">About</Link>
             </li>
