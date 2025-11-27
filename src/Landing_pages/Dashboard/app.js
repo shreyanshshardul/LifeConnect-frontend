@@ -1,14 +1,17 @@
 import { useState } from "react";
-import Navbar from "./Navbar";
-import Cards from "./Cards";
 
-export default function Home() {
-  const [search, setSearch] = useState("");
-
+function App() {
+  const [search, setSearch] = useState(""); // ← ye search term
+  
+  
   return (
     <>
-      <Navbar setSearch={setSearch} />
-      <Cards search={search} />
+      <Navbar setSearch={setSearch} />  {/* Navbar ko pass karo */}
+      <Routes>
+        ...
+        <Route path="/cards/*" element={<Cards search={search} />} />
+        ...
+      </Routes>
     </>
-  );
+  )
 }

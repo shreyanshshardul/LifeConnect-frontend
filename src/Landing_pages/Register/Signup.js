@@ -16,9 +16,18 @@ export default function Signup() {
     password: "",
   });
 
+  const [emailError, setEmailError] = useState(false); // ✅ email validation state
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     setSignupInfo({ ...signupInfo, [name]: value });
+
+    // ✅ Strict email validation (common domains)
+    if (name === "email") {
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@(gmail|yahoo|outlook|hotmail)\.com$/;
+      setEmailError(!emailPattern.test(value));
+    }
   };
 
   const handleSignup = async (e) => {
@@ -29,22 +38,29 @@ export default function Signup() {
       return handleError("Please enter all the values");
     }
 
+    if (emailError) {
+      return handleError("Please enter a valid email (gmail, yahoo, outlook, hotmail)");
+    }
+
     try {
-      const uri = "http://localhost:8080/signup";
-      const response = await fetch(uri, {
+      const response = await fetch("http://localhost:8080/signup", {
         method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
+        headers: { "content-type": "application/json" },
         body: JSON.stringify(signupInfo),
       });
 
       const result = await response.json();
-      const { success, error, message } = result;
+      const { success, token, error, message } = result;
 
       if (success) {
         handleSuccess("Registered Successfully");
-        setTimeout(() => navigate("/login"), 1000);
+
+        if (token) {
+          localStorage.setItem("token", token);
+          navigate("/cards"); // direct dashboard if token returned
+        } else {
+          navigate("/login"); // otherwise redirect to login
+        }
       } else if (error) {
         const details = error?.details?.[0]?.message;
         handleError(details || "Validation Error");
@@ -62,7 +78,7 @@ export default function Signup() {
         <div className="col d-flex justify-content-center mt-5 p-3">
           <Box
             sx={{
-              width: { xs: "100%", sm: 400 }, // responsive width
+              width: { xs: "100%", sm: 400 },
               display: "flex",
               flexDirection: "column",
               padding: 3,
@@ -74,11 +90,7 @@ export default function Signup() {
 
             <form
               onSubmit={handleSignup}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "18px", // ⭐ gap between input fields
-              }}
+              style={{ display: "flex", flexDirection: "column", gap: "18px" }}
             >
               <TextField
                 fullWidth
@@ -94,6 +106,8 @@ export default function Signup() {
                 name="email"
                 value={signupInfo.email}
                 onChange={handleChange}
+                error={emailError} // ✅ red underline if invalid
+                helperText={emailError ? "Use a valid email (gmail, yahoo, outlook, hotmail)" : ""}
               />
 
               <TextField
@@ -120,7 +134,10 @@ export default function Signup() {
 
               <p className="text-center mt-2">
                 Already have an account?{" "}
-                <Link to="/login" style={{ color: "#cf2b2b", textDecoration: "none" }}>
+                <Link
+                  to="/login"
+                  style={{ color: "#cf2b2b", textDecoration: "none" }}
+                >
                   Login
                 </Link>
               </p>

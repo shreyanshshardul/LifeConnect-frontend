@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 
@@ -20,24 +20,34 @@ import Cards from "./Landing_pages/Dashboard/Cards";
 import Error from "./Landing_pages/Error";
 import Navbar1 from "./Landing_pages/Dashboard/Navbar1";
 import Donar from "./Landing_pages/Dashboard/Donar";
-import Recipient from "./Landing_pages/Dashboard/Recipient"
+import Recipient from "./Landing_pages/Dashboard/Recipient";
 
-// ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
-//   WRAPPER COMPONENT (NEW)
-// ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+import ProtectedRoute from "./ProtectedRoute";
+
+function AppWrapper() {
+  return (
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  );
+}
 
 function App() {
   const location = useLocation();
 
-  // yaha conditions bana sakte ho future me
-  // example: dashboard pages par navbar/footer hide karna
+  // Dashboard pages par Navbar1 show, baki pages par normal Navbar
   const hideNavbar = location.pathname.startsWith("/cards");
+
+  // 🔹 Search state
+  const [search, setSearch] = useState("");
 
   return (
     <>
-      {hideNavbar ? <Navbar1/> : <Navbar/>}
+      {/* Navbar me search prop pass */}
+      {hideNavbar ? <Navbar1 setSearch={setSearch} /> : <Navbar setSearch={setSearch} />}
 
       <Routes>
+        {/* Public Routes */}
         <Route path="/" element={<Homepage />} />
         <Route path="/about" element={<Aboutpage />} />
         <Route path="/support" element={<Supportpage />} />
@@ -46,28 +56,46 @@ function App() {
         <Route path="/FAQs" element={<FAQs />} />
         <Route path="/PrivatePolicy" element={<PrivatePolicy />} />
         <Route path="/Termcondition" element={<Termcondition />} />
-        <Route path="/cards/*" element={<Cards />} />
-         <Route path="/cards/donar" element={<Donar />} />
-         <Route path="/cards/recipient" element={<Recipient />} />
+
+        {/* Protected Routes */}
+        <Route
+          path="/cards/*"
+          element={
+            <ProtectedRoute>
+              <Cards search={search} /> {/* 🔹 search prop pass */}
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/cards/donar"
+          element={
+            <ProtectedRoute>
+              <Donar />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/cards/recipient"
+          element={
+            <ProtectedRoute>
+              <Recipient />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Catch-all */}
         <Route path="*" element={<Error />} />
       </Routes>
 
-      {<Footer />}
+      <Footer />
     </>
   );
 }
 
-// ▬▬▬▬▬▬▬▬▬▬▬▬
-//   RENDER
-// ▬▬▬▬▬▬▬▬▬▬▬▬
-
+// RENDER
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-    <BrowserRouter>
-         <App />
-    </BrowserRouter>
-   
- 
-);
+root.render(<AppWrapper />);
 
 reportWebVitals();

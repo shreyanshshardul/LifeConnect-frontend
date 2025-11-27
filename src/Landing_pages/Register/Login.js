@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import React, { useState } from "react";
 import { handleError, handleSuccess } from "../utils";
 import { ToastContainer } from "react-toastify";
-import "./Signup.css"; // same CSS for parallax (if needed)
+import "./Signup.css";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -32,18 +32,21 @@ export default function Login() {
       const uri = "http://localhost:8080/login";
       const response = await fetch(uri, {
         method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
+        headers: { "content-type": "application/json" },
         body: JSON.stringify(loginInfo),
       });
 
       const result = await response.json();
-      const { success, message } = result;
+      const { success, message, token } = result;
 
-      if (success) {
+      if (success && token) {
+        // ✅ Save token for authentication
+        localStorage.setItem("token", token);
+
         handleSuccess("Logged in Successfully");
-        setTimeout(() => navigate("/cards"), 1000);
+
+        // ✅ Redirect to Cards page
+        navigate("/cards");
       } else {
         handleError(message || "Login failed");
       }
@@ -70,11 +73,7 @@ export default function Login() {
 
             <form
               onSubmit={handleLogin}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "18px",
-              }}
+              style={{ display: "flex", flexDirection: "column", gap: "18px" }}
             >
               <TextField
                 fullWidth
@@ -108,10 +107,7 @@ export default function Login() {
 
               <p className="text-center mt-2">
                 Don't have an account?{" "}
-                <Link
-                  to="/signup"
-                  style={{ color: "#cf2b2b", textDecoration: "none" }}
-                >
+                <Link to="/signup" style={{ color: "#cf2b2b", textDecoration: "none" }}>
                   Sign Up
                 </Link>
               </p>

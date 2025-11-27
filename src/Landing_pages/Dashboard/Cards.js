@@ -7,7 +7,9 @@ export default function Cards({ search }) {
   const [recipients, setRecipients] = useState([]);
   const [mergedCards, setMergedCards] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [filteredCards, setFilteredCards] = useState([]);
 
+  // 🔹 Fetch data once
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -27,7 +29,7 @@ export default function Cards({ search }) {
     fetchData();
   }, []);
 
-  // 🟥🟩 ALTERNATE MERGE
+  // 🔹 Merge donors + recipients
   useEffect(() => {
     const temp = [];
     const maxLen = Math.max(donors.length, recipients.length);
@@ -40,24 +42,27 @@ export default function Cards({ search }) {
     setMergedCards(temp);
   }, [donors, recipients]);
 
-  // 🟩 Safe search
-  const searchText = search?.trim().toLowerCase() || "";
+  // 🔹 Filter cards based on search input
+  useEffect(() => {
+    const searchText = search?.trim().toLowerCase() || "";
 
-  const filteredCards = mergedCards.filter((u) => {
-    if (!u) return false; // very important
+    const filtered = mergedCards.filter((u) => {
+      if (!u) return false;
+      const name = u.name?.toLowerCase() || "";
+      const city = u.city?.toLowerCase() || "";
+      const bg = u.blood_group?.toLowerCase() || "";
+      const type = u.type?.toLowerCase() || "";
 
-    const name = u.name?.toLowerCase() || "";
-    const city = u.city?.toLowerCase() || "";
-    const bg = u.blood_group?.toLowerCase() || "";
-    const type = u.type?.toLowerCase() || "";
+      return (
+        name.includes(searchText) ||
+        city.includes(searchText) ||
+        bg.includes(searchText) ||
+        type.includes(searchText)
+      );
+    });
 
-    return (
-      name.includes(searchText) ||
-      city.includes(searchText) ||
-      bg.includes(searchText) ||
-      type.includes(searchText)
-    );
-  });
+    setFilteredCards(filtered);
+  }, [search, mergedCards]); // 🔹 update when search or mergedCards change
 
   if (loading) {
     return <h2 className="text-center text-white mt-5">Loading...</h2>;
