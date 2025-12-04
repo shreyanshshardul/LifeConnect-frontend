@@ -1,7 +1,25 @@
-.button{
-    background-color:white;
+.join-title {
+  background-color: #cf2b2b;
+  color: white;
+  padding: 10px;
+  border-radius: 12px;
+  letter-spacing: 1px;
 }
 
-.button:hover{
-    background-color:#cf2b2b;
+.neon-btn {
+  background: #cf2b2b;
+  color: white;
+  padding: 15px 35px;
+  font-size: 1.4rem;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 8px 20px rgba(207,43,43,0.3);
+}
+
+.neon-btn:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 35px rgba(207,43,43,0.6);
+  background: #b82020;
 }

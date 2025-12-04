@@ -6,7 +6,7 @@
 /* LEFT PARALLAX IMAGE */
 .signup-left {
   flex: 1;
-background-image: url("./bg.jpg");
+ background-image: url("./bg.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed; /* ⭐ Parallax */

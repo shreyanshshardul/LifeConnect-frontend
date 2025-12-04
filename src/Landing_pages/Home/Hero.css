@@ -7,3 +7,26 @@
   text-decoration: underline;
   cursor: pointer;
 }
+.hero-wrapper {
+  animation: fadeIn 1.2s ease-in-out;
+}
+
+.glow-title {
+  color: #cf2b2b;
+  text-shadow: 0 0 25px rgba(207, 43, 43, 0.8),
+               0 0 45px rgba(207, 43, 43, 0.6);
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+.glow-title:hover {
+  transform: scale(1.08);
+  text-shadow: 0 0 40px rgba(207, 43, 43, 1),
+               0 0 75px rgba(207, 43, 43, 0.9);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+

@@ -2,32 +2,35 @@ import React from "react";
 
 export default function Content() {
   return (
-    <div className="container mt-5 mb-5">
-      <h3 className="mt-5 " style={{ color: "#cf2b2b" }}>
-        How LifeConnect works:
-      </h3>
-      <h5 className="text-muted mt-3 fs-3">Steps:</h5>
-      <div className="row">
-        <div className="col-1"></div>
-        <div className="col-7">
-          <li>
-            <h1 className="fs-5 text-muted p-3">
-              Sign Up – Register as a donor or a recipient.
-            </h1>
+    <div className="container mt-5 mb-5 animate-slide">
+      <h3 style={{ color: "#cf2b2b", fontWeight: 600 }}>How LifeConnect Works:</h3>
+      <h5 className="text-secondary fs-4 mt-2 mb-4">Steps:</h5>
+
+      <div
+        className="p-4"
+        style={{
+          borderLeft: "5px solid #cf2b2b",
+          background: "rgba(255,255,255,0.8)",
+          backdropFilter: "blur(4px)",
+          borderRadius: "10px",
+          boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
+        }}
+      >
+        <ul style={{ listStyle: "none", padding: 0 }}>
+          {[
+            "Sign Up – Register as a donor or a recipient.",
+            "Post Availability or Requirement – Share blood group and location.",
+            "Connect & Save Lives – Instant matching through our secure system.",
+          ].map((text, i) => (
+            <li
+              key={i}
+              className="hover-step"
+              style={{ transition: "0.3s" }}
+            >
+              <h1 className="fs-5 text-muted p-2">{text}</h1>
             </li>
-            <li>
-            <h1 className="fs-5 text-muted p-3">
-              Post Availability or Requirement – Donors share their available
-              blood group and location; recipients post their needs.
-            </h1>
-            </li>
-            <li>
-            <h1 className="fs-5 text-muted p-3">
-              Connect & Save Lives – LifeConnect matches and connects both parties instantly through our secure system.
-            </h1>
-            </li>
-        </div>
-        <div className="col-4"></div>
+          ))}
+        </ul>
       </div>
     </div>
   );

@@ -1,0 +1,65 @@
+.image-section-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-wrapper {
+  position: relative;
+  width: 90%;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.image-wrapper:hover {
+  transform: scale(1.03);
+  box-shadow: 0 15px 60px rgba(0,0,0,0.5);
+}
+
+.hero-image {
+  width: 100%;
+  display: block;
+  filter: brightness(0.85);
+  transition: filter 0.4s ease;
+}
+
+.image-wrapper:hover .hero-image {
+  filter: brightness(1);
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,0.35);
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.image-wrapper:hover .image-overlay {
+  opacity: 1;
+}
+
+.overlay-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-shadow: 0 0 15px rgba(255,255,255,0.8);
+}
+
+.overlay-sub {
+  font-size: 1.2rem;
+  max-width: 700px;
+  text-shadow: 0 0 10px rgba(0,0,0,0.7);
+}
