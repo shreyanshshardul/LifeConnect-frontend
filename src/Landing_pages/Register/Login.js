@@ -6,6 +6,8 @@ import React, { useState } from "react";
 import { handleError, handleSuccess } from "../utils";
 import { ToastContainer } from "react-toastify";
 import "./Signup.css";
+const BACKEND_LINK =
+  process.env.REACT_APP_BACKEND_LINK || "http://localhost:8080";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -29,7 +31,7 @@ export default function Login() {
     }
 
     try {
-      const uri = "http://localhost:8080/login";
+      const uri = `${BACKEND_LINK}/login`;
       const response = await fetch(uri, {
         method: "POST",
         headers: { "content-type": "application/json" },

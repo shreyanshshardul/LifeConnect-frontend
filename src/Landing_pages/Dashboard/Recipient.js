@@ -9,6 +9,8 @@ import "./Donar.css";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { handleSuccess, handleError } from "../utils";
+const BACKEND_LINK =
+  process.env.REACT_APP_BACKEND_LINK || "http://localhost:8080";
 
 export default function Recipient() {
   const navigate = useNavigate();
@@ -36,7 +38,7 @@ export default function Recipient() {
     }
 
     try {
-      const res = await fetch("http://localhost:8080/cards/recipient", {
+      const res = await fetch(`${BACKEND_LINK}/cards/recipient`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(recipient),

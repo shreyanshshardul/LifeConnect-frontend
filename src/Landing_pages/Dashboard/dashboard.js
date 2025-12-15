@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+const BACKEND_LINK = process.env.REACT_APP_BACKEND_LINK;
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);
@@ -8,7 +9,7 @@ export default function Dashboard() {
     const token = localStorage.getItem("token");
 
     axios
-      .get("http://localhost:5000/auth/profile", {
+      .get(`${BACKEND_LINK}/auth/profile`, {
         headers: { token },
       })
       .then((res) => {

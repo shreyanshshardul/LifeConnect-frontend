@@ -6,6 +6,8 @@ import React, { useState } from "react";
 import { handleError, handleSuccess } from "../utils";
 import { ToastContainer } from "react-toastify";
 import "./Signup.css";
+const BACKEND_LINK =
+  process.env.REACT_APP_BACKEND_LINK || "http://localhost:8080";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -43,7 +45,7 @@ export default function Signup() {
     }
 
     try {
-      const response = await fetch("http://localhost:8080/signup", {
+      const response = await fetch(`${BACKEND_LINK}/signup`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(signupInfo),
